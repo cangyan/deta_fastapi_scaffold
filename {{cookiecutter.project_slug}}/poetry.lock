@@ -101,6 +101,21 @@ doc = ["mdx-include (>=1.4.1,<2.0.0)", "mkdocs (>=1.1.2,<2.0.0)", "mkdocs-markdo
 test = ["anyio[trio] (>=3.2.1,<4.0.0)", "black (==22.3.0)", "databases[sqlite] (>=0.3.2,<0.6.0)", "email_validator (>=1.1.1,<2.0.0)", "flake8 (>=3.8.3,<6.0.0)", "flask (>=1.1.2,<3.0.0)", "httpx (>=0.14.0,<0.19.0)", "isort (>=5.0.6,<6.0.0)", "mypy (==0.910)", "orjson (>=3.2.1,<4.0.0)", "peewee (>=3.13.3,<4.0.0)", "pytest (>=6.2.4,<7.0.0)", "pytest-cov (>=2.12.0,<4.0.0)", "python-multipart (>=0.0.5,<0.0.6)", "requests (>=2.24.0,<3.0.0)", "sqlalchemy (>=1.3.18,<1.5.0)", "types-dataclasses (==0.6.5)", "types-orjson (==3.6.2)", "types-ujson (==4.2.1)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0,<6.0.0)"]
 
 [[package]]
+name = "fastapi-events"
+version = "0.5.1"
+description = "Event dispatching library for FastAPI"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+starlette = "*"
+
+[package.extras]
+aws = ["boto3 (>=1.14)"]
+test = ["flake8 (>=3.9.2)", "moto[sqs] (==2.2)", "mypy (>=0.971)", "pydantic (>=1.5.0)", "pytest (>=6.2.4)", "pytest-asyncio (>=0.18.3)", "pytest-env (>=0.6.2)", "pytest-mock (>=3.6.1)", "pytest-mypy (>=0.9.1)", "requests"]
+
+[[package]]
 name = "flake8"
 version = "5.0.4"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -374,7 +389,7 @@ standard = ["colorama (>=0.4)", "httptools (>=0.4.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "fa95b5b72fea4bad57e6c400d5d53d6ed10a8e8e6ccfa38eb7912b462dc2b4fe"
+content-hash = "f49ef6d5663a32a7bee0a5730be5e9fb816b39e66b330ccd0aa027ac1c7d0a4a"
 
 [metadata.files]
 anyio = [
@@ -425,6 +440,10 @@ colorama = [
 fastapi = [
     {file = "fastapi-0.81.0-py3-none-any.whl", hash = "sha256:9ac5f5d252b4b394df29accb1ed4bedf30e0e87fc6eb7ec75e1449fa040bfc17"},
     {file = "fastapi-0.81.0.tar.gz", hash = "sha256:9dafdc41feda85ee5acf0f7dd6bcb7fd946318a6664b41fd33e33b26f666a346"},
+]
+fastapi-events = [
+    {file = "fastapi-events-0.5.1.tar.gz", hash = "sha256:5ca93705bffb3c64ccb229e45504daff2f392ffc18011531776fa9beea466b1f"},
+    {file = "fastapi_events-0.5.1-py3-none-any.whl", hash = "sha256:fd4a2e26626133de2966bf45182fb014ae59ff372b91ea46f7571a7347c7a533"},
 ]
 flake8 = [
     {file = "flake8-5.0.4-py2.py3-none-any.whl", hash = "sha256:7a1cf6b73744f5806ab95e526f6f0d8c01c66d7bbe349562d22dfca20610b248"},
