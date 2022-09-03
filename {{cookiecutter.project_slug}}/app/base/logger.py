@@ -1,4 +1,6 @@
+import json
 import logging
+from datetime import datetime
 
 from app.base.config import settings
 
@@ -10,7 +12,8 @@ class CustomFormatter(logging.Formatter):
     red = "\x1b[31;20m"
     bold_red = "\x1b[31;1m"
     reset = "\x1b[0m"
-    format_str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
+    # format_str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
+    format_str = "{message}"
 
     FORMATS = {
         logging.DEBUG: grey + format_str + reset,
@@ -22,8 +25,15 @@ class CustomFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         log_fmt = self.FORMATS.get(record.levelno)
-        formatter = logging.Formatter(log_fmt)
-        return formatter.format(record)
+        # formatter = logging.Formatter()
+        m = {
+            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "level": record.levelname,
+            "message": record.getMessage(),
+            "filename": record.filename,
+            "lineno": record.lineno
+        }
+        return log_fmt.format(message=json.dumps(m, ensure_ascii=False))
 
 
 logger = logging.getLogger(__name__)
