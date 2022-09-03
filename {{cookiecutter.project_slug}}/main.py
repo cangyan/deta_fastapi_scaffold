@@ -9,6 +9,7 @@ from app.api.api_v1.api import router
 from app.api.common.api import router as common_router
 from app.base.config import settings
 from app.handler import *
+from app.middleware.debug_api import DebugApiMiddleware
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -28,6 +29,8 @@ app.add_middleware(
 )
 
 app.add_middleware(EventHandlerASGIMiddleware, handlers=[local_handler])
+
+app.add_middleware(DebugApiMiddleware)
 
 app.include_router(router, prefix=settings.API_V1_STR)
 app.include_router(common_router)
