@@ -16,7 +16,7 @@ app = FastAPI(
 )
 
 @app.on_event("startup")
-async def startup():
+async def startup() -> None:
     Instrumentator().instrument(app).expose(app, include_in_schema=False)
 
 app.add_middleware(
@@ -33,7 +33,7 @@ app.include_router(router, prefix=settings.API_V1_STR)
 app.include_router(common_router)
 
 
-def start():
+def start() -> None:
     """Launched with `poetry run start` at root level"""
     uvicorn.run(
         "main:app", host="0.0.0.0", port=8000, reload=True, loop="asyncio"
