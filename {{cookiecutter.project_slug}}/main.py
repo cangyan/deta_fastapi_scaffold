@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi_events.handlers.local import local_handler
 from fastapi_events.middleware import EventHandlerASGIMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 from starlette.middleware.cors import CORSMiddleware
 
 from app.api.api_v1.api import router
@@ -12,6 +13,10 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
 )
+
+@app.on_event("startup")
+async def startup():
+    Instrumentator().instrument(app).expose(app)
 
 app.add_middleware(
     CORSMiddleware,
