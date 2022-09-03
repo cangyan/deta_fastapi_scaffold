@@ -6,6 +6,7 @@ from prometheus_fastapi_instrumentator import Instrumentator
 from starlette.middleware.cors import CORSMiddleware
 
 from app.api.api_v1.api import router
+from app.api.common.api import router as common_router
 from app.base.config import settings
 from app.handler import *
 
@@ -16,7 +17,7 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def startup():
-    Instrumentator().instrument(app).expose(app)
+    Instrumentator().instrument(app).expose(app, include_in_schema=False)
 
 app.add_middleware(
     CORSMiddleware,
@@ -29,6 +30,7 @@ app.add_middleware(
 app.add_middleware(EventHandlerASGIMiddleware, handlers=[local_handler])
 
 app.include_router(router, prefix=settings.API_V1_STR)
+app.include_router(common_router)
 
 
 def start():
