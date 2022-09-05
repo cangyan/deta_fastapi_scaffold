@@ -32,7 +32,7 @@ app.add_middleware(
 
 app.add_middleware(EventHandlerASGIMiddleware, handlers=[local_handler])
 
-app.add_middleware(DebugApiMiddleware)
+# app.add_middleware(DebugApiMiddleware)
 
 app.include_router(router, prefix=settings.API_V1_STR)
 app.include_router(common_router)
