@@ -16,9 +16,11 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
 )
 
+
 @app.on_event("startup")
 async def startup() -> None:
     Instrumentator().instrument(app).expose(app, include_in_schema=False)
+
 
 app.add_middleware(
     CORSMiddleware,

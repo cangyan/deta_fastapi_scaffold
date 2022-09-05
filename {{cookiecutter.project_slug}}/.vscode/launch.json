@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "poetry run",
+            "type": "python",
+            "request": "launch",
+            "module": "poetry",
+            "args": [
+                "run",
+                "start"
+            ],
+            "jinja": true
+        },
+        {
+            "name": "uvicorn run",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:app",
+                "--reload"
+            ],
+            "jinja": true
+        }
+    ]
+}
