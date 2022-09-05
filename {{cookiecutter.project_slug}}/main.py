@@ -8,7 +8,7 @@ from starlette.middleware.cors import CORSMiddleware
 from app.api.api_v1.api import router
 from app.api.common.api import router as common_router
 from app.base.config import settings
-from app.handler import *
+from app.handler.demo import *
 from app.middleware.debug_api import DebugApiMiddleware
 
 app = FastAPI(

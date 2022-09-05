@@ -12,9 +12,7 @@
 - [x] 平滑重启 #通过容器重启
 - [x] 事件
 - [x] 系统埋点
+- [x] worker
+- [x] ~~task~~ ps. BaseHTTPMiddleware 中间件与 BackgroundTasks 有冲突
 - [ ] ddd
-- [ ] worker
 - [ ] 业务上报
-- [ ] CI/CD
-  - [ ] 代码统一格式化
-- [ ] job
