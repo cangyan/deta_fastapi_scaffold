@@ -47,5 +47,5 @@
   ],
   "forwardPorts": [8000, 8000],
   "postCreateCommand": "make install",
-  "mounts": ["source=/data/logs,target=/data/logs,type=bind,consistency=cached"]
+  "mounts": ["source={{cookiecutter.log_folder}},target=/data/logs,type=bind,consistency=cached"]
 }
