@@ -5,15 +5,22 @@
   "settings": {
     "terminal.integrated.defaultProfile.linux": null,
     "python.pythonPath": "/usr/local/bin/python",
-    "python.testing.pytestArgs": ["tests", "-vv"],
+    "python.testing.pytestArgs": [
+      "tests",
+      "-vv"
+    ],
     "python.testing.unittestEnabled": true,
     "python.testing.pytestEnabled": true,
     "python.analysis.typeCheckingMode": "basic",
     "python.formatting.blackPath": "/usr/local/bin/black",
-    "python.formatting.blackArgs": ["--line-length=79"],
+    "python.formatting.blackArgs": [
+      "--line-length=79"
+    ],
     "python.formatting.provider": "black",
     "python.linting.flake8Path": "/usr/local/bin/flake8",
-    "python.linting.flake8Args": ["--max-line-length=100"],
+    "python.linting.flake8Args": [
+      "--max-line-length=100"
+    ],
     "python.sortImports.path": "/usr/local/bin/isort",
     "python.linting.mypyPath": "/usr/local/bin/mypy",
     "python.linting.mypyEnabled": true,
@@ -32,7 +39,8 @@
       "**/.mypy_cache": true,
       "**/.venv": true,
       "**/.pytest_cache": true
-    }
+    },
+    "editor.formatOnSave": true
   },
   "extensions": [
     "ms-python.python",
@@ -45,7 +53,12 @@
     "oderwat.indent-rainbow",
     "shardulm94.trailing-spaces"
   ],
-  "forwardPorts": [8000, 8000],
+  "forwardPorts": [
+    8000,
+    8000
+  ],
   "postCreateCommand": "make install",
-  "mounts": ["source={{cookiecutter.log_folder}},target=/data/logs,type=bind,consistency=cached"]
+  "mounts": [
+    "source={{cookiecutter.log_folder}},target={{cookiecutter.log_folder}},type=bind,consistency=cached"
+  ]
 }

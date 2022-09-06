@@ -14,5 +14,3 @@
 - [x] 系统埋点
 - [x] worker
 - [x] ~~task~~ ps. BaseHTTPMiddleware 中间件与 BackgroundTasks 有冲突
-- [ ] ddd
-- [ ] 业务上报
