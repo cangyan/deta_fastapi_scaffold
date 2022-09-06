@@ -1,11 +1,13 @@
 # timeout_middleware.py
 import asyncio
 from typing import Callable
+
 from fastapi import Request, Response
 from fastapi.responses import JSONResponse
-from starlette.types import ASGIApp
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.status import HTTP_504_GATEWAY_TIMEOUT
+from starlette.types import ASGIApp
+
 
 class TimeoutMiddleware(BaseHTTPMiddleware):
     """
@@ -22,4 +24,6 @@ class TimeoutMiddleware(BaseHTTPMiddleware):
             return await asyncio.wait_for(call_next(request), timeout=self.timeout)
         except asyncio.TimeoutError:
             return JSONResponse(
-                content={'detail': 'Request processing time excedeed limit'}, status_code=HTTP_504_GATEWAY_TIMEOUT)
+                content={"detail": "Request processing time excedeed limit"},
+                status_code=HTTP_504_GATEWAY_TIMEOUT,
+            )

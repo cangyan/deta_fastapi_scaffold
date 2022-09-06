@@ -1,13 +1,13 @@
 import json
 
-from app.base.logger import logger
 from fastapi.encoders import jsonable_encoder
 from starlette.concurrency import iterate_in_threadpool
-from starlette.middleware.base import (BaseHTTPMiddleware,
-                                       RequestResponseEndpoint)
+from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
 from starlette.types import Message
+
+from app.base.logger import logger
 
 
 class DebugApiMiddleware(BaseHTTPMiddleware):

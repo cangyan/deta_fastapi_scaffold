@@ -31,7 +31,7 @@ class CustomFormatter(logging.Formatter):
             "level": record.levelname,
             "message": record.getMessage(),
             "filename": record.filename,
-            "lineno": record.lineno
+            "lineno": record.lineno,
         }
         return log_fmt.format(message=json.dumps(m, ensure_ascii=False))
 

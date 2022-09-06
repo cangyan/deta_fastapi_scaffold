@@ -21,6 +21,7 @@ app = FastAPI(
 async def startup() -> None:
     Instrumentator().instrument(app).expose(app, include_in_schema=False)
 
+
 app.add_middleware(DebugApiMiddleware)
 app.add_middleware(
     CORSMiddleware,
