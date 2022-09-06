@@ -30,7 +30,7 @@ async def write_log(params: ReqDemoWriteLog)->RestfulResponse:
         logger.debug(params.message)
 
     data = WriteLog(result="ok", message=params.message)
-    return RestfulResponse(code=0, msg="成功", data=data)
+    return RestfulResponse(data=data)
 
 @router.get("/event", response_model=RestfulResponse)
 async def event() -> RestfulResponse:
@@ -39,4 +39,4 @@ async def event() -> RestfulResponse:
         {"id": uuid.uuid4(), "created_at": datetime.now()},
     )
 
-    return RestfulResponse(code=0, msg="成功", data=None)
+    return RestfulResponse(data=None)
