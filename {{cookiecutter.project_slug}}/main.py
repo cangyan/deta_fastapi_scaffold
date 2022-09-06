@@ -1,6 +1,3 @@
-from socket import timeout
-
-import uvicorn
 from fastapi import FastAPI
 from fastapi_events.handlers.local import local_handler
 from fastapi_events.middleware import EventHandlerASGIMiddleware
@@ -24,7 +21,7 @@ app = FastAPI(
 async def startup() -> None:
     Instrumentator().instrument(app).expose(app, include_in_schema=False)
 
-
+app.add_middleware(DebugApiMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -35,8 +32,6 @@ app.add_middleware(
 
 app.add_middleware(EventHandlerASGIMiddleware, handlers=[local_handler])
 app.add_middleware(TimeoutMiddleware, timeout=settings.TIMEOUT)
-
-# app.add_middleware(DebugApiMiddleware)
 
 app.include_router(router, prefix=settings.API_V1_STR)
 app.include_router(common_router)
