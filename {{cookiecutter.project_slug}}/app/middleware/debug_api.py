@@ -1,20 +1,19 @@
 import json
 
+from app.base.logger import logger
 from fastapi.encoders import jsonable_encoder
 from starlette.concurrency import iterate_in_threadpool
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
-from starlette.types import Message
-
-from app.base.logger import logger
+from starlette.types import ASGIApp, Message
 
 
 class DebugApiMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app):
+    def __init__(self, app: ASGIApp) -> None:
         super().__init__(app)
 
-    async def set_body(self, request: Request):
+    async def set_body(self, request: Request) -> None:
         receive_ = await request._receive()
 
         async def receive() -> Message:
@@ -22,9 +21,7 @@ class DebugApiMiddleware(BaseHTTPMiddleware):
 
         request._receive = receive
 
-    async def dispatch(
-        self, request: Request, call_next: RequestResponseEndpoint
-    ) -> Response:
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         await self.set_body(request)
         body = await request.body()
         response = await call_next(request)
