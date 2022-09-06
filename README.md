@@ -13,4 +13,4 @@
 - [x] 事件
 - [x] 系统埋点
 - [x] worker
-- [x] ~~task~~ ps. BaseHTTPMiddleware 中间件与 BackgroundTasks 有冲突
+- [x] ~~task~~ ps. BaseHTTPMiddleware 中间件与 BackgroundTasks 有冲突参

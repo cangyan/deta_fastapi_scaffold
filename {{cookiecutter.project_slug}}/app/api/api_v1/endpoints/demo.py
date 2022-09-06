@@ -3,20 +3,21 @@ import time
 import uuid
 from datetime import datetime
 
-from fastapi import APIRouter
-from fastapi_events.dispatcher import dispatch
-
 from app.base.config import settings
 from app.base.logger import logger
 from app.event.demo import DemoEvents
 from app.schemas.request.demo import ReqDemoWriteLog
 from app.schemas.response.common import RestfulResponse
 from app.schemas.response.demo import Config, WriteLog
+from app.utils.timeit import timeit
+from fastapi import APIRouter
+from fastapi_events.dispatcher import dispatch
 
 router = APIRouter()
 
 
 @router.get("/config", response_model=RestfulResponse[Config])
+@timeit
 def config() -> RestfulResponse:
     config = Config(project_name=settings.PROJECT_NAME)
 
