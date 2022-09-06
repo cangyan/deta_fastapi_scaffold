@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str
     LOG_FILE: str
     LOG_LEVEL: str
+    TIMEOUT: int
 
     class Config:
         env_file = ".env"

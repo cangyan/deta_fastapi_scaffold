@@ -1,4 +1,6 @@
 
+import asyncio
+import time
 import uuid
 from datetime import datetime
 
@@ -40,3 +42,18 @@ async def event() -> RestfulResponse:
     )
 
     return RestfulResponse(data=None)
+
+
+@router.get("/sleep/{wait_time}", response_model=RestfulResponse)
+def wait_for(wait_time: int)->RestfulResponse:
+    time.sleep(wait_time)
+    return RestfulResponse(data={
+        "wait_time": wait_time
+    })
+
+@router.get("/async_sleep/{wait_time}", response_model=RestfulResponse)
+async def async_wait_for(wait_time: int)->RestfulResponse:
+    await asyncio.sleep(wait_time)
+    return RestfulResponse(data={
+        "wait_time": wait_time
+    })

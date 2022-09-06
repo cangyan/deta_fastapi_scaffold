@@ -1,3 +1,5 @@
+from socket import timeout
+
 import uvicorn
 from fastapi import FastAPI
 from fastapi_events.handlers.local import local_handler
@@ -10,6 +12,7 @@ from app.api.common.api import router as common_router
 from app.base.config import settings
 from app.handler.demo import *
 from app.middleware.debug_api import DebugApiMiddleware
+from app.middleware.timeout import TimeoutMiddleware
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -31,6 +34,7 @@ app.add_middleware(
 )
 
 app.add_middleware(EventHandlerASGIMiddleware, handlers=[local_handler])
+app.add_middleware(TimeoutMiddleware, timeout=settings.TIMEOUT)
 
 # app.add_middleware(DebugApiMiddleware)
 

@@ -1,3 +1,5 @@
 PROJECT_NAME={{cookiecutter.project_name}}
 SERVICE_NAME={{cookiecutter.project_slug}}
-
+LOG_FILE=/tmp/{{cookiecutter.project_slug}}.log
+LOG_LEVEL=debug
+TIMEOUT=2
