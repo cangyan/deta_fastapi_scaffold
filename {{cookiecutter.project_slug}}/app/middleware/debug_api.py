@@ -38,8 +38,8 @@ class DebugApiMiddleware(BaseHTTPMiddleware):
             await self.set_body(request)
             body = await request.body()
             response = await call_next(request)
-            response_body = [chunk async for chunk in response.body_iterator]
-            response.body_iterator = iterate_in_threadpool(iter(response_body))
+            response_body = [chunk async for chunk in response.body_iterator]  # type: ignore
+            response.body_iterator = iterate_in_threadpool(iter(response_body))  # type: ignore
             content = (b"".join(response_body)).decode()
 
             message = {
