@@ -1,4 +1,5 @@
 import json
+import re
 
 from app.base.logger import logger
 from fastapi.encoders import jsonable_encoder
@@ -7,6 +8,8 @@ from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoin
 from starlette.requests import Request
 from starlette.responses import Response
 from starlette.types import ASGIApp, Message
+
+routes_without_middleware = ["/download/*"]
 
 
 class DebugApiMiddleware(BaseHTTPMiddleware):
@@ -22,21 +25,31 @@ class DebugApiMiddleware(BaseHTTPMiddleware):
         request._receive = receive
 
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
-        await self.set_body(request)
-        body = await request.body()
-        response = await call_next(request)
-        response_body = [chunk async for chunk in response.body_iterator]
-        response.body_iterator = iterate_in_threadpool(iter(response_body))
-        content = (b"".join(response_body)).decode()
+        isExcludeRouter = False
 
-        message = {
-            "req": {
-                "api": request.url.path,
-                "method": request.method,
-                "query_string": request.query_params.__str__(),
-                "body": body.decode(),
-            },
-            "resp": content,
-        }
-        logger.debug(jsonable_encoder(message))
-        return response
+        for path in routes_without_middleware:
+            x = re.search(path, request.url.path)
+            if x is not None:
+                isExcludeRouter = True
+
+        if isExcludeRouter:
+            return await call_next(request)
+        else:
+            await self.set_body(request)
+            body = await request.body()
+            response = await call_next(request)
+            response_body = [chunk async for chunk in response.body_iterator]
+            response.body_iterator = iterate_in_threadpool(iter(response_body))
+            content = (b"".join(response_body)).decode()
+
+            message = {
+                "req": {
+                    "api": request.url.path,
+                    "method": request.method,
+                    "query_string": request.query_params.__str__(),
+                    "body": str(body),
+                },
+                "resp": content,
+            }
+            logger.debug(jsonable_encoder(message))
+            return response

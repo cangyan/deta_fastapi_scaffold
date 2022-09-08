@@ -1,4 +1,5 @@
 PROJECT_NAME={{cookiecutter.project_name}}
+PROJECT_Key=
 SERVICE_NAME={{cookiecutter.project_slug}}
 LOG_FILE={{cookiecutter.log_folder}}/{{cookiecutter.project_slug}}.log
 LOG_LEVEL={{cookiecutter.log_level}}

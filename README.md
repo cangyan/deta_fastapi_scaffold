@@ -11,6 +11,6 @@
 - [x] logger
 - [x] 平滑重启 #通过容器重启
 - [x] 事件
-- [x] 系统埋点
 - [x] worker
 - [x] ~~task~~ ps. BaseHTTPMiddleware 中间件与 BackgroundTasks 有冲突参
+- [x] ~~系统埋点~~ deta 触发不了 app startup event 事件，依赖最大不超过 250MB，故移除
