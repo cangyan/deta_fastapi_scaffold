@@ -1,8 +1,8 @@
 {
-  "project_name": "Base Project",
+  "project_name": "project name",
   "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
-  "author_name": "创建者名",
-  "author_email": "创建者邮箱",
+  "author_name": "author name",
+  "author_email": "author email",
   "log_folder": "/tmp",
   "log_level": "debug|info|warning|error|critical",
   "timeout": 10
